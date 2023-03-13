@@ -1,6 +1,5 @@
 import lvgl as lv
-import micropython
-import math
+from ._utils import point_on_circle as _point_on_circle
 
 
 class _Attrs(object):
@@ -47,22 +46,6 @@ class _Attrs(object):
 
     def items(self):
         return self._storage.items()
-
-
-@micropython.viper
-def _point_on_circle(
-    degree: int,
-    center_x: int,
-    center_y: int,
-    radius: int
-) -> tuple:
-    radians = float(math.radians(degree / 1000.0))
-    cos = float(math.cos(radians))
-    sin = float(math.sin(radians))
-
-    x = int(round(center_x + (radius * cos)))
-    y = int(round(center_y + (radius * sin)))
-    return x, y
 
 
 class ArcLabel(lv.obj):
@@ -131,7 +114,7 @@ class ArcLabel(lv.obj):
 
         else:
             rad_dif = 0
-        
+
         for char in text:
             t_angle = 2700 - (3600 - int(round(angle, 1) * 10))
 
