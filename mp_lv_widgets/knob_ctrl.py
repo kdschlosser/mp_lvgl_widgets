@@ -135,9 +135,10 @@ class knob_ctrl(lv.obj):
     def __init__(self, parent=None):
         super().__init__(parent)
         super().add_style(_style, 0)
+        super().add_flag(lv.obj.FLAG.OVERFLOW_VISIBLE)
 
         parent.update_layout()
-        size = min(parent.get_width(), parent.get_height())
+        size = min(parent.get_width() - 20, parent.get_height() - 20)
 
         super().set_width(size)
         super().set_height(size)
@@ -153,10 +154,10 @@ class knob_ctrl(lv.obj):
         shadow.set_align(lv.ALIGN.CENTER)
         shadow.set_style_shadow_opa(175, 0)
 
-        shadow.set_style_shadow_width(30, 0)
+        shadow.set_style_shadow_width(60, 0)
         shadow.set_style_shadow_spread(2, 0)
-        shadow.set_style_shadow_ofs_x(-15, 0)
-        shadow.set_style_shadow_ofs_y(-15, 0)
+        shadow.set_style_shadow_ofs_x(-20, 0)
+        shadow.set_style_shadow_ofs_y(-20, 0)
         shadow.clear_flag(lv.obj.FLAG.SCROLLABLE)
         shadow.clear_flag(lv.obj.FLAG.CLICKABLE)
 
@@ -1087,7 +1088,7 @@ if __name__ == '__main__':
     import display_driver  # NOQA
 
     screen = lv.scr_act()
-    screen.set_style_bg_color(lv.color_hex(0x000000), 0)
+    screen.set_style_bg_color(lv.color_hex(0x2D2D2D), 0)
     screen.set_style_bg_opa(255, 0)
 
     volume = knob_ctrl(screen)
